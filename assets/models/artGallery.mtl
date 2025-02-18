@@ -1,0 +1,156 @@
+# Blender 4.3.2 MTL File: 'artGallery.blend'
+# www.blender.org
+
+newmtl Material.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Color.jpg
+map_Ns /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_NormalGL.jpg
+
+newmtl Material.002
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Wood069_2K-JPG/Wood069_2K-JPG_Color.jpg
+map_Ns Wood069_2K-JPG/Wood069_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 Wood069_2K-JPG/Wood069_2K-JPG_NormalGL.jpg
+
+newmtl StatueOfGod
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd StatueOfGod.png
+map_d StatueOfGod.png
+
+newmtl Untitled_design_(1)
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Untitled design (1).png
+map_d Untitled design (1).png
+
+newmtl Yurisha_Bajracharya
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Yurisha Bajracharya.png
+map_d Yurisha Bajracharya.png
+
+newmtl Yurisha_Bajracharya_(1)
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Yurisha Bajracharya (1).png
+map_d Yurisha Bajracharya (1).png
+
+newmtl Yurisha_Bajracharya_(2)
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Yurisha Bajracharya (2).png
+map_d Yurisha Bajracharya (2).png
+
+newmtl Yurisha_Bajracharya_(3)
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd /Users/shristipokhrel/Downloads/Yurisha Bajracharya (3).png
+map_d /Users/shristipokhrel/Downloads/Yurisha Bajracharya (3).png
+
+newmtl krishna
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd krishna.png
+map_d krishna.png
+
+newmtl luffy
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd luffy.png
+map_d luffy.png
+
+newmtl sukuna
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd sukuna.png
+map_d sukuna.png
+
+newmtl wall
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Color.jpg
+map_Ns /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_NormalGL.jpg
+
+newmtl wall.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Color.jpg
+map_Ns /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_NormalGL.jpg
+
+newmtl window_frame
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.022307 0.040499
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl zoro
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd zoro.png
+map_d zoro.png
