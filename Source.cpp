@@ -81,6 +81,11 @@ int main()
 	Shader ourShader("Shaders/model_loading.vs", "Shaders/model_loading.fs");
 	Model ourModel("assets/models/artGallery.obj");
 
+	// Define light properties
+	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+	glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+	glm::vec3 objectColor(1.0f, 1.0f, 1.0f);
+
 	// render loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -96,6 +101,12 @@ int main()
 
 		ourShader.Activate();
 
+		// Set lighting uniforms
+		ourShader.setVec3("lightPos", lightPos);
+		ourShader.setVec3("viewPos", camera.Position);
+		ourShader.setVec3("lightColor", lightColor);
+		ourShader.setVec3("objectColor", objectColor);
+
 		// view/projection transformations
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH/ (float)WINDOW_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
@@ -107,6 +118,8 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
 		ourShader.setMat4("model", model);
+
+		//Render the model
 		ourModel.Draw(ourShader);
 
 		glfwSwapBuffers(window);
