@@ -8,9 +8,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Color.jpg
-map_Ns /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Roughness.jpg
-map_Bump -bm 1.000000 /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_NormalGL.jpg
+map_Kd Travertine009_2K-JPG_Color.jpg
+map_Ns Travertine009_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 Travertine009_2K-JPG_NormalGL.jpg
 
 newmtl Material.002
 Ka 1.000000 1.000000 1.000000
@@ -19,9 +19,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd Wood069_2K-JPG/Wood069_2K-JPG_Color.jpg
-map_Ns Wood069_2K-JPG/Wood069_2K-JPG_Roughness.jpg
-map_Bump -bm 1.000000 Wood069_2K-JPG/Wood069_2K-JPG_NormalGL.jpg
+map_Kd Wood069_2K-JPG_Color.jpg
+map_Ns Wood069_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 Wood069_2K-JPG_NormalGL.jpg
 
 newmtl StatueOfGod
 Ns 250.000000
@@ -80,8 +80,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd /Users/shristipokhrel/Downloads/Yurisha Bajracharya (3).png
-map_d /Users/shristipokhrel/Downloads/Yurisha Bajracharya (3).png
+map_Kd Yurisha Bajracharya (3).png
+map_d Yurisha Bajracharya (3).png
 
 newmtl krishna
 Ns 250.000000
@@ -120,9 +120,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Color.jpg
-map_Ns /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Roughness.jpg
-map_Bump -bm 1.000000 /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_NormalGL.jpg
+map_Kd Travertine009_2K-JPG_Color.jpg
+map_Ns Travertine009_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 Travertine009_2K-JPG_NormalGL.jpg
 
 newmtl wall.001
 Ka 1.000000 1.000000 1.000000
@@ -131,9 +131,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Color.jpg
-map_Ns /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_Roughness.jpg
-map_Bump -bm 1.000000 /Users/shristipokhrel/Downloads/Travertine009_2K-JPG/Travertine009_2K-JPG_NormalGL.jpg
+map_Kd Travertine009_2K-JPG_Color.jpg
+map_Ns Travertine009_2K-JPG_Roughness.jpg
+map_Bump -bm 1.000000 Travertine009_2K-JPG_NormalGL.jpg
 
 newmtl window_frame
 Ns 250.000000
