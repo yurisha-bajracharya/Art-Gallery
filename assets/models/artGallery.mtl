@@ -60,8 +60,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd Yurisha Bajracharya (1).png
-map_d Yurisha Bajracharya (1).png
+map_Kd Yunika.png
+map_d Yunika.png
 
 newmtl Yurisha_Bajracharya_(2)
 Ns 250.000000
@@ -80,8 +80,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd Yurisha Bajracharya (3).png
-map_d Yurisha Bajracharya (3).png
+map_Kd luffy.png
+map_d luffy.png
 
 newmtl krishna
 Ns 250.000000
@@ -100,8 +100,8 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd luffy.png
-map_d luffy.png
+map_Kd Yurisha Bajracharya (3).png
+map_d Yurisha Bajracharya (3).png
 
 newmtl sukuna
 Ns 250.000000

@@ -1,10 +1,10 @@
 ﻿  Source.cpp
-C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(250,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(251,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(255,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(256,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(258,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(259,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(260,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(261,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(265,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(266,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(268,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(269,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Opengl-artgallery.vcxproj -> C:\Users\Acer\Documents\Opengl-artgallery\x64\Debug\Opengl-artgallery.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

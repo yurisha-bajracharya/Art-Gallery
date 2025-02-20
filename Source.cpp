@@ -20,8 +20,8 @@ const int WINDOW_HEIGHT = 600;
 
 unsigned int groundVAO;
 
-//Camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+// Adjust camera position
+Camera camera(glm::vec3(0.0f, 0.0f, -10.0f)); // Camera further back
 float lastX = WINDOW_WIDTH / 2.0f;
 float lastY = WINDOW_HEIGHT / 2.0f; // stores the previous mouse position for smooth camera movement
 bool firstMouse = true;
@@ -50,15 +50,22 @@ void processInput(GLFWwindow* window)
 		camera.ProcessKeyboard(Camera::LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(Camera::RIGHT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera::UP, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera::DOWN, deltaTime);
+
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
 }
 
 unsigned int createGroundPlane() {
 	float groundVertices[] = {
 		// Positions              // Texture Coords
-		-50.0f, -10.0f,  50.0f,   0.0f,  1.0f,  // Bottom-left
-		 50.0f, -10.0f,  50.0f,   1.0f,  1.0f,  // Bottom-right
-		 50.0f, -10.0f, -50.0f,   1.0f,  0.0f,  // Top-right
-		-50.0f, -10.0f, -50.0f,   0.0f,  0.0f   // Top-left
+		-50.0f, -1.0f,  50.0f,   0.0f,  1.0f,  // Bottom-left
+		 50.0f, -1.0f,  50.0f,   1.0f,  1.0f,  // Bottom-right
+		 50.0f, -1.0f, -50.0f,   1.0f,  0.0f,  // Top-right
+		-50.0f, -1.0f, -50.0f,   0.0f,  0.0f   // Top-left
 	};
 
 
@@ -212,7 +219,7 @@ int main()
 
 		// Render the ground
 		glm::mat4 groundModel = glm::mat4(1.0f);
-		groundModel = glm::translate(groundModel, glm::vec3(0.0f, -1.0f, 0.0f));
+		groundModel = glm::translate(groundModel, glm::vec3(0.0f, 0.08f, 0.0f));
 		ourShader.setMat4("model", groundModel);
 		glBindTexture(GL_TEXTURE_2D, groundTexture);
 		glBindVertexArray(groundVAO);
@@ -227,7 +234,10 @@ int main()
 
 		// Render the model
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 2.0f)); // Model at z = 5.0f
+		model = glm::rotate(model, glm::radians(00.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Rotate around X-axis
+		model = glm::rotate(model, glm::radians(5.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate around Z-axis
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around Y-axis
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		ourShader.setMat4("model", model);
 
