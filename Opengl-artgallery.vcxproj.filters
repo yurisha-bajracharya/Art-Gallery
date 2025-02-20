@@ -67,6 +67,12 @@
     <None Include="..\..\Downloads\artGallery\artGallery.mtl">
       <Filter>assets\models</Filter>
     </None>
+    <None Include="shaders\background.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\background.fs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\..\Downloads\backpack\backpack.obj">
