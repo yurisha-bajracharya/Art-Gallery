@@ -7,19 +7,23 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <glm/glm.hpp> // Added missing glm include
-#include <glm/gtc/type_ptr.hpp> // Needed for setting uniforms
+#include <glm/glm.hpp>  // For glm functionality
+#include <glm/gtc/type_ptr.hpp>  // For passing glm matrices to shaders
 
 // Function to read shader text files
 std::string get_file_contents(const char* filename);
 
 class Shader {
 public:
-    GLuint ID; // Ensure ID is declared in public scope
+    GLuint ID;  // Shader Program ID
 
+    // Constructor that loads shaders from file and compiles them
     Shader(const char* vertexFile, const char* fragmentFile);
 
-    void Activate();
+    // Activate the shader program
+    void Activate() const;
+
+    // Delete the shader program
     void Delete();
 
     // Utility functions for setting uniforms

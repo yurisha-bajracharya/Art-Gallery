@@ -165,6 +165,14 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Object>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\background.fs">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="shaders\background.vs">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

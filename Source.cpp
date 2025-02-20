@@ -23,7 +23,7 @@ unsigned int groundVAO;
 //Camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = WINDOW_WIDTH / 2.0f;
-float lastY = WINDOW_HEIGHT / 2.0f;
+float lastY = WINDOW_HEIGHT / 2.0f; // stores the previous mouse position for smooth camera movement
 bool firstMouse = true;
 
 //timing
@@ -36,7 +36,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-
+// Handle keyboard inputs
 void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -54,12 +54,13 @@ void processInput(GLFWwindow* window)
 
 unsigned int createGroundPlane() {
 	float groundVertices[] = {
-		// Positions          // Texture Coords
-		-50.0f, -1.0f, -50.0f,  0.0f,  50.0f,
-		 50.0f, -1.0f, -50.0f,  50.0f,  50.0f,
-		 50.0f, -1.0f,  50.0f,  50.0f,  0.0f,
-		-50.0f, -1.0f,  50.0f,  0.0f,  0.0f
+		// Positions              // Texture Coords
+		-50.0f, -10.0f,  50.0f,   0.0f,  1.0f,  // Bottom-left
+		 50.0f, -10.0f,  50.0f,   1.0f,  1.0f,  // Bottom-right
+		 50.0f, -10.0f, -50.0f,   1.0f,  0.0f,  // Top-right
+		-50.0f, -10.0f, -50.0f,   0.0f,  0.0f   // Top-left
 	};
+
 
 	unsigned int groundIndices[] = {
 		0, 1, 2,
@@ -83,6 +84,38 @@ unsigned int createGroundPlane() {
 	glEnableVertexAttribArray(0);
 
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindVertexArray(0);
+
+	return VAO;
+}
+unsigned int backgroundVAO, backgroundVBO;
+
+// Function to create the background plane
+unsigned int createBackground() {
+	float backgroundVertices[] = {
+		// Positions        // Colors (R, G, B)
+		-1.0f,  1.0f, 0.0f, 0.5f, 0.8f, 1.0f, // Top-left (sky blue)
+		 1.0f,  1.0f, 0.0f, 0.5f, 0.8f, 1.0f, // Top-right (sky blue)
+		 1.0f, -1.0f, 0.0f, 0.3f, 0.5f, 0.2f, // Bottom-right (greenish brown)
+		-1.0f, -1.0f, 0.0f, 0.3f, 0.5f, 0.2f  // Bottom-left (greenish brown)
+	};
+
+
+	unsigned int VAO, VBO;
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(backgroundVertices), backgroundVertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0);
@@ -117,31 +150,34 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+	Shader backgroundShader("Shaders/background.vs", "Shaders/background.fs");
+	Model ourModel("assets/models/artGallery.obj");
+	Shader ourShader("Shaders/model_loading.vs", "Shaders/model_loading.fs");
 
 	glViewport(0, 0, 800, 600);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	//glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glEnable(GL_DEPTH_TEST);
 
+	backgroundVAO = createBackground();
+	unsigned int backgroundTexture = ourModel.TextureFromFile("ground.png", "assets/textures");
 
 	// Enable blending for PNG transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	Model ourModel("assets/models/artGallery.obj");
 
-
-	Shader ourShader("Shaders/model_loading.vs", "Shaders/model_loading.fs");
-	
 
 	unsigned int groundTexture = ourModel.TextureFromFile("ground.png", "assets/textures");
+	groundVAO = createGroundPlane();
 
 	// Define light properties
 	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 	glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 	glm::vec3 objectColor(1.0f, 1.0f, 1.0f);
 
-	groundVAO = createGroundPlane();
+	// Enable depth testing globally
+	glEnable(GL_DEPTH_TEST);
 
-	// render loop
+	// Render loop
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = static_cast<float>(glfwGetTime());
@@ -150,46 +186,59 @@ int main()
 
 		processInput(window);
 
-		//rendering commands here
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		// Clear buffers before rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// Render the background first (disable depth testing to ensure it's always drawn)
+		glDisable(GL_DEPTH_TEST);
+		backgroundShader.Activate();
+		glm::mat4 bgProjection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+		glm::mat4 bgView = glm::mat4(1.0f);
+		backgroundShader.setMat4("projection", bgProjection);
+		backgroundShader.setMat4("view", bgView);
+		glBindVertexArray(backgroundVAO);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glBindVertexArray(0);
+		glEnable(GL_DEPTH_TEST); // Re-enable depth testing for 3D rendering
+
+		// Set up the main shader
 		ourShader.Activate();
 
-		// Ground transformation
-		glm::mat4 groundModel = glm::mat4(1.0f);
-		groundModel = glm::translate(groundModel, glm::vec3(0.0f, -1.0f, 0.0f)); // Position it below
-		ourShader.setMat4("model", groundModel);
+		// Set up view and projection for the main scene
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 view = camera.GetViewMatrix();
+		ourShader.setMat4("projection", projection);
+		ourShader.setMat4("view", view);
 
-		// Bind the ground VAO and draw it
+		// Render the ground
+		glm::mat4 groundModel = glm::mat4(1.0f);
+		groundModel = glm::translate(groundModel, glm::vec3(0.0f, -1.0f, 0.0f));
+		ourShader.setMat4("model", groundModel);
+		glBindTexture(GL_TEXTURE_2D, groundTexture);
 		glBindVertexArray(groundVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
-		// Set lighting uniforms
+		// Set lighting uniforms (before rendering the model)
 		ourShader.setVec3("lightPos", lightPos);
 		ourShader.setVec3("viewPos", camera.Position);
 		ourShader.setVec3("lightColor", lightColor);
 		ourShader.setVec3("objectColor", objectColor);
 
-		// view/projection transformations
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH/ (float)WINDOW_HEIGHT, 0.1f, 100.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		ourShader.setMat4("projection", projection);
-		ourShader.setMat4("view", view);
-
-		// render the loaded model
+		// Render the model
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		ourShader.setMat4("model", model);
 
-		//Render the model
 		ourModel.Draw(ourShader);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	glDisable(GL_BLEND);
+
+	// Cleanup
+	glDisable(GL_DEPTH_TEST);
 	glfwTerminate();
 	return 0;
 }
@@ -216,5 +265,4 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
-
 
