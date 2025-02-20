@@ -1,4 +1,11 @@
-﻿  LINK : C:\Users\Acer\Documents\Opengl-artgallery\x64\Debug\Opengl-artgallery.exe not found or not built by the last incremental link; performing full link
+﻿  Source.cpp
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(201,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(202,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(206,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(207,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(209,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Acer\Documents\Opengl-artgallery\Source.cpp(210,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  LINK : C:\Users\Acer\Documents\Opengl-artgallery\x64\Debug\Opengl-artgallery.exe not found or not built by the last incremental link; performing full link
   Opengl-artgallery.vcxproj -> C:\Users\Acer\Documents\Opengl-artgallery\x64\Debug\Opengl-artgallery.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

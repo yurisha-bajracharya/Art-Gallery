@@ -32,13 +32,17 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16);
     vec3 specular = specularStrength * spec * lightColor;
 
-  
+    vec3 lighting = (ambient + diffuse + specular);
+
+    // Use texture with alpha
+    vec4 texColor = texture(texture_diffuse1, TexCoords);
     
-    vec3 lighting = (ambient + diffuse + specular) ;
+    // Discard transparent pixels
+    if (texColor.a < 0.1)
+        discard;
 
-    // Use texture
-    vec3 textureColor = texture(texture_diffuse1, TexCoords).rgb;
-    vec3 result = lighting * textureColor;
+    vec3 result = lighting * texColor.rgb;
 
-    FragColor = vec4(result, 1.0);
+    // Preserve alpha transparency
+    FragColor = vec4(result, texColor.a);
 }
