@@ -28,11 +28,11 @@ public:
     float Zoom;
 
     // Constructor with vectors
-    Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 3.0f),
+    Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, -5.0f), // Adjust camera position
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
-        float yaw = 270.0f, float pitch = 0.0f)
-        : Front(glm::vec3(0.0f, 0.0f, 1.0f)),
-        MovementSpeed(2.5f), MouseSensitivity(0.1f), Zoom(45.0f)
+        float yaw = 90.0f, float pitch = 0.0f)
+        : Front(glm::vec3(0.0f, 0.0f, -1.0f)), // Front now faces -Z (into the gallery)
+        MovementSpeed(2.0f), MouseSensitivity(0.1f), Zoom(45.0f)
     {
         Position = position;
         WorldUp = up;
@@ -40,6 +40,7 @@ public:
         Pitch = pitch;
         UpdateCameraVectors();
     }
+
 
     // Returns the view matrix calculated using Euler Angles and the LookAt matrix
     glm::mat4 GetViewMatrix()
@@ -53,7 +54,9 @@ public:
         FORWARD,
         BACKWARD,
         LEFT,
-        RIGHT
+        RIGHT,
+        UP,
+        DOWN
     };
 
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)
@@ -67,6 +70,10 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
+        if (direction == UP)
+            Position += WorldUp * velocity;
+        if (direction == DOWN)
+            Position -= WorldUp * velocity;
     }
 
 
