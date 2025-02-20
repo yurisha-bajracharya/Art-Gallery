@@ -30,8 +30,8 @@ public:
     // Constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 3.0f),
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
-        float yaw = -90.0f, float pitch = 0.0f)
-        : Front(glm::vec3(0.0f, 0.0f, -1.0f)),
+        float yaw = 270.0f, float pitch = 0.0f)
+        : Front(glm::vec3(0.0f, 0.0f, 1.0f)),
         MovementSpeed(2.5f), MouseSensitivity(0.1f), Zoom(45.0f)
     {
         Position = position;
@@ -49,18 +49,26 @@ public:
 
     // Processes input received from any keyboard-like input system. 
     // Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    void ProcessKeyboard(int direction, float deltaTime)
+    enum Camera_Movement {
+        FORWARD,
+        BACKWARD,
+        LEFT,
+        RIGHT
+    };
+
+    void ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = MovementSpeed * deltaTime;
-        if (direction == 0) // FORWARD
+        if (direction == FORWARD)
             Position += Front * velocity;
-        if (direction == 1) // BACKWARD
+        if (direction == BACKWARD)
             Position -= Front * velocity;
-        if (direction == 2) // LEFT
+        if (direction == LEFT)
             Position -= Right * velocity;
-        if (direction == 3) // RIGHT
+        if (direction == RIGHT)
             Position += Right * velocity;
     }
+
 
     // Processes input received from a mouse input system. 
     // Takes in the x and y delta of the mouse movement.

@@ -18,6 +18,8 @@ void processInput(GLFWwindow* window);
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
+unsigned int groundVAO;
+
 //Camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = WINDOW_WIDTH / 2.0f;
@@ -40,26 +42,68 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	// Camera movement based on keys
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)  // Move Forward
-		camera.ProcessKeyboard(0, deltaTime);  // 0 -> FORWARD
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)  // Move Backward
-		camera.ProcessKeyboard(1, deltaTime);  // 1 -> BACKWARD
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)  // Move Left
-		camera.ProcessKeyboard(2, deltaTime);  // 2 -> LEFT
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)  // Move Right
-		camera.ProcessKeyboard(3, deltaTime);  // 3 -> RIGHT
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera::FORWARD, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera::BACKWARD, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera::LEFT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera::RIGHT, deltaTime);
 }
 
+unsigned int createGroundPlane() {
+	float groundVertices[] = {
+		// Positions          // Texture Coords
+		-50.0f, -1.0f, -50.0f,  0.0f,  50.0f,
+		 50.0f, -1.0f, -50.0f,  50.0f,  50.0f,
+		 50.0f, -1.0f,  50.0f,  50.0f,  0.0f,
+		-50.0f, -1.0f,  50.0f,  0.0f,  0.0f
+	};
+
+	unsigned int groundIndices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	unsigned int VAO, VBO, EBO;
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(groundVertices), groundVertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(groundIndices), groundIndices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindVertexArray(0);
+
+	return VAO;
+}
 
 int main()
 {
 	glfwInit();
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "Art Gallery", NULL, NULL);
+
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -78,13 +122,24 @@ int main()
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glEnable(GL_DEPTH_TEST);
 
-	Shader ourShader("Shaders/model_loading.vs", "Shaders/model_loading.fs");
+
+	// Enable blending for PNG transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	Model ourModel("assets/models/artGallery.obj");
+
+
+	Shader ourShader("Shaders/model_loading.vs", "Shaders/model_loading.fs");
+	
+
+	unsigned int groundTexture = ourModel.TextureFromFile("ground.png", "assets/textures");
 
 	// Define light properties
 	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 	glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 	glm::vec3 objectColor(1.0f, 1.0f, 1.0f);
+
+	groundVAO = createGroundPlane();
 
 	// render loop
 	while (!glfwWindowShouldClose(window))
@@ -100,6 +155,16 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		ourShader.Activate();
+
+		// Ground transformation
+		glm::mat4 groundModel = glm::mat4(1.0f);
+		groundModel = glm::translate(groundModel, glm::vec3(0.0f, -1.0f, 0.0f)); // Position it below
+		ourShader.setMat4("model", groundModel);
+
+		// Bind the ground VAO and draw it
+		glBindVertexArray(groundVAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
 
 		// Set lighting uniforms
 		ourShader.setVec3("lightPos", lightPos);
@@ -121,10 +186,35 @@ int main()
 
 		//Render the model
 		ourModel.Draw(ourShader);
-
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+	glDisable(GL_BLEND);
 	glfwTerminate();
 	return 0;
 }
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	if (firstMouse)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		firstMouse = false;
+	}
+
+	float xoffset = xpos - lastX;
+	float yoffset = lastY - ypos;  // Inverted y-axis
+
+	lastX = xpos;
+	lastY = ypos;
+
+	camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	camera.ProcessMouseScroll(static_cast<float>(yoffset));
+}
+
+
