@@ -30,6 +30,35 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
+// Define light positions (above each art piece)
+glm::vec3 lightPositions[] = {
+	glm::vec3(-2.5f, 2.8f, -3.0f),  // Above leftmost painting on the left wall
+	glm::vec3(-2.5f, 2.8f, -1.5f),
+	glm::vec3(-2.5f, 2.8f, 0.0f),
+	glm::vec3(-2.5f, 2.8f, 1.5f),
+	glm::vec3(-2.5f, 2.8f, 3.0f),
+
+	glm::vec3(2.5f, 2.8f, -3.0f),  // Above rightmost painting on the right wall
+	glm::vec3(2.5f, 2.8f, -1.5f),
+	glm::vec3(2.5f, 2.8f, 0.0f),
+	glm::vec3(2.5f, 2.8f, 1.5f),
+	glm::vec3(2.5f, 2.8f, 3.0f)
+};
+
+glm::vec3 lightColors[] = {
+	glm::vec3(0.03f, 0.025f, 0.005f),  // Deep yellow light
+	glm::vec3(0.035f, 0.03f, 0.006f),  // Slightly warmer yellow
+	glm::vec3(0.03f, 0.025f, 0.005f),
+	glm::vec3(0.035f, 0.03f, 0.006f),
+	glm::vec3(0.03f, 0.025f, 0.005f),
+	glm::vec3(0.035f, 0.03f, 0.006f),
+	glm::vec3(0.03f, 0.025f, 0.005f),
+	glm::vec3(0.035f, 0.03f, 0.006f),
+	glm::vec3(0.03f, 0.025f, 0.005f),
+	glm::vec3(0.035f, 0.03f, 0.006f)
+};
+
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	std::cerr << "RESIze!!" << std::endl;
@@ -226,6 +255,15 @@ int main()
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
+		for (int i = 0; i < 10; i++) {
+			std::string posName = "lightPositions[" + std::to_string(i) + "]";
+			std::string colorName = "lightColor[" + std::to_string(i) + "]";
+			ourShader.setVec3(posName.c_str(), lightPositions[i]);
+			ourShader.setVec3(colorName.c_str(), lightColors[i]);
+		}
+
+		// Pass viewer position to shader (for specular calculations)
+		ourShader.setVec3("viewPos", camera.Position);
 		// Set lighting uniforms (before rendering the model)
 		ourShader.setVec3("lightPos", lightPos);
 		ourShader.setVec3("viewPos", camera.Position);
