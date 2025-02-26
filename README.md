@@ -3,10 +3,11 @@
 ## Introduction
 This is a Computer Graphics project focused on creating a 3D art gallery. The project utilizes OpenGL for rendering, Blender for 3D modeling, and C++ for programming. It was completed by the following team members:
 
-- Shristi Pokhrel (080BCT081)
-- Shruti Maharjan (080BCT082)
-- Swarnima Khadka (080BCT092)
-- Yurisha Bajracharya (080BCT096)
+
+- [Shristi Pokhrel](https://github.com/Shri-29)
+- [Shruti Maharjan](https://github.com/shruti-1007)
+- [Swarnima Khadka](https://github.com/Swarnima-Khadka1)
+- [Yurisha Bajracharya](https://github.com/yurisha-bajracharya)
 
 ## Libraries Used
 - OpenGL
