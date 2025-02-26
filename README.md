@@ -31,13 +31,14 @@ This project is built using Visual Studio.
 5. In case of any linking errors, you may need to build the required libraries yourself. CMake can be used to build and set up the libraries.
 
 ## Output
-![Final Output](path/to/image)
-![Different view](path/to/image)
-![Different view](path/to/image)
-![2D visualization example](path/to/image)
+![Final Output](https://github.com/yurisha-bajracharya/Art-Gallery/blob/main/assets/1.png)
+![Different view](https://github.com/yurisha-bajracharya/Art-Gallery/blob/main/assets/Screenshot%202025-02-21%20092741.png)
+![Different view](https://github.com/yurisha-bajracharya/Art-Gallery/blob/main/assets/Screenshot%202025-02-21%20092811.png)
+![2D visualization example](https://github.com/yurisha-bajracharya/Art-Gallery/blob/main/assets/Screenshot%202025-02-26%20183158.png)
 
 ## Helpful Links
 - [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
 - [Learn OpenGL](https://learnopengl.com/)
 - [GLFW Documentation](https://www.glfw.org/)
 - [Setting up OpenGL libraries](https://learnopengl.com/Getting-started/Creating-a-window)
+- [Assimp for model loading](https://assimp.org/)
