@@ -1,7 +1,7 @@
 # Art Gallery with 2D Visualizations on Visitor Trends
 
 ## Introduction
-This is a Computer Graphics project focused on visualizing visitor trends in an art gallery. The project utilizes OpenGL for rendering, Blender for 3D modeling, and C++ for programming. It was completed by the following team members:
+This is a Computer Graphics project focused on creating a 3D art gallery. The project utilizes OpenGL for rendering, Blender for 3D modeling, and C++ for programming. It was completed by the following team members:
 
 - Shristi Pokhrel (080BCT081)
 - Shruti Maharjan (080BCT082)
