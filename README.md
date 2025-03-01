@@ -16,8 +16,11 @@ This is a Computer Graphics project focused on creating a 3D art gallery. The pr
 - C++ Standard Library
 
 ## Features
-- **Interactive 3D View**: Navigate through the art gallery using keyboard controls.
-- **Visitor Trend Visualization**: Visitor trends in the gallery are represented visually in the 3D space.
+- **Interactive 2D Navigation**: Explore the art gallery with intuitive keyboard controls for seamless movement.
+- **Visitor Trend Mapping**: Visualize visitor trends over time through 2D representations.
+
+Check out the code for 2D visualization on GitHub: [2D Visualization](https://github.com/shruti-1007/2D-Visualization)
+
 
 ## How to Run
 This project is built using Visual Studio.
